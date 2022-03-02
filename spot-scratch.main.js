@@ -28,10 +28,10 @@ class SpotScratch {
 
     bodyCommand({cmdName}) {
         fetch('http://192.168.80.101:8000/command', {
-            method: 'POST',
+            method: 'GET',
             headers: {},
             body: JSON.stringify({
-              Command: cmdName // eg 'sit'
+              Command: "cmdName" // eg 'sit'
             }),
         });
 
