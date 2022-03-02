@@ -31,7 +31,7 @@ class SpotScratch {
             method: 'POST',
             headers: {},
             body: JSON.stringify({
-              Command: "cmdName" // eg 'sit'
+              Command: cmdName // eg 'sit'
             }),
         });
 
