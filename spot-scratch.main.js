@@ -17,6 +17,23 @@ class SpotScratch {
                             "defaultValue": "sit",
                             "menu": "cmdMenu"
                         },
+                    },
+                    "opcode": "rotateCommand",
+                    "blockType": "command",
+                    "text": "tell spot to rotate [pitch] [yaw] [roll]",
+                    "arguments": {
+                        "pitch": {
+                            "type": "float",
+                            "defaultValue": "0"
+                        },
+                        "yaw": {
+                            "type": "float",
+                            "defaultValue": "0"
+                        },
+                        "roll": {
+                            "type": "float",
+                            "defaultValue": "0"
+                        },
                     }
                 }
             ],
@@ -32,6 +49,23 @@ class SpotScratch {
             headers: {},
             body: JSON.stringify({
               Command: cmdName // eg 'sit'
+            }),
+        });
+
+        return true;
+    }
+
+    rotateCommand({pitch}, {yaw}, {roll}) {
+        fetch('http://192.168.80.101:8000/command', {
+            method: 'POST',
+            headers: {},
+            body: JSON.stringify({
+              Command: 'rotate', // eg 'sit'
+              Args: {
+                  pitch: pitch,
+                  yaw: yaw,
+                  roll: roll
+              }
             }),
         });
 
