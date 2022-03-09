@@ -23,15 +23,15 @@ class SpotScratch {
                     "text": "tell spot to rotate [pitch] [yaw] [roll]",
                     "arguments": {
                         "pitch": {
-                            "type": "float",
+                            "type": "number",
                             "defaultValue": "0"
                         },
                         "yaw": {
-                            "type": "float",
+                            "type": "number",
                             "defaultValue": "0"
                         },
                         "roll": {
-                            "type": "float",
+                            "type": "number",
                             "defaultValue": "0"
                         },
                     }
@@ -55,16 +55,16 @@ class SpotScratch {
         return true;
     }
 
-    rotateCommand({pitch}, {yaw}, {roll}) {
+    rotateCommand(args) {
         fetch('http://192.168.80.101:8000/command', {
             method: 'POST',
             headers: {},
             body: JSON.stringify({
               Command: 'rotate', // eg 'sit'
               Args: {
-                  pitch: pitch,
-                  yaw: yaw,
-                  roll: roll
+                  pitch: args.pitch,
+                  yaw: args.yaw,
+                  roll: args.roll
               }
             }),
         });
