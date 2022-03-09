@@ -18,6 +18,8 @@ class SpotScratch {
                             "menu": "cmdMenu"
                         },
                     },
+                },
+                {
                     "opcode": "rotateCommand",
                     "blockType": "command",
                     "text": "tell spot to rotate [pitch] [yaw] [roll]",
