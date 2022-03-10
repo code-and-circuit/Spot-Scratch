@@ -22,7 +22,7 @@ class SpotScratch {
                 {
                     "opcode": "rotateCommand",
                     "blockType": "command",
-                    "text": "tell spot to rotate [pitch] [yaw] [roll]",
+                    "text": "tell spot to rotate [pitch] deg [yaw] deg [roll] deg",
                     "arguments": {
                         "pitch": {
                             "type": "number",
@@ -46,8 +46,9 @@ class SpotScratch {
     }
 
     bodyCommand({cmdName}) {
-        fetch('http://192.168.80.101:8000/command', {
+        await fetch('http://192.168.80.101:8000/command', {
             method: 'POST',
+            mode: 'no-cors',
             headers: {},
             body: JSON.stringify({
               Command: cmdName // eg 'sit'
@@ -58,20 +59,21 @@ class SpotScratch {
     }
 
     rotateCommand(args) {
-        fetch('http://192.168.80.101:8000/command', {
-            method: 'POST',
-            headers: {},
-            body: JSON.stringify({
-              Command: 'rotate', // eg 'sit'
-              Args: {
-                  pitch: args.pitch,
-                  yaw: args.yaw,
-                  roll: args.roll
-              }
-            }),
+        return new Promise((resolve, reject) => {
+            fetch('http://192.168.80.101:8000/command', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {},
+                body: JSON.stringify({
+                    Command: 'rotate', // eg 'sit'
+                    Args: {
+                        pitch: args.pitch,
+                        yaw: args.yaw,
+                        roll: args.roll
+                    }
+                }),
+            }).then(() => resolve());
         });
-
-        return true;
     }
 }
 
